@@ -85,8 +85,6 @@ public class Crypto2 {
             listener.onInitFinished();
         }
 
-
-
         interface InitListener {
             void onInitStatusUpdate(String status);
             void onInitFinished();
