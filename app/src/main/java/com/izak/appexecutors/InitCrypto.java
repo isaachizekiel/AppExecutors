@@ -2,8 +2,6 @@ package com.izak.appexecutors;
 
 import android.os.SystemClock;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 class InitCrypto implements Runnable {
