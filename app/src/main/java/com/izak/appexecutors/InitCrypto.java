@@ -16,10 +16,10 @@ class InitCrypto implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 50; i++) {
-            int leftLimit = 97; // letter 'a'
-            int rightLimit = 122; // letter 'z'
-            int targetStringLength = 10;
+        for (;;) {
+            int leftLimit = 32; // character ' '
+            int rightLimit = 127; //
+            int targetStringLength = 16;
             Random random = new Random();
             String generatedString = random.ints(leftLimit, rightLimit + 1)
                     .limit(targetStringLength)
