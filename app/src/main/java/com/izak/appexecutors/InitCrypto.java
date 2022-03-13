@@ -4,7 +4,7 @@ import android.os.SystemClock;
 
 import java.util.Random;
 
-class InitCrypto implements Runnable {
+class InitCrypto extends Crypto implements Runnable {
     private static final String TAG = "InitCrypto";
     Listener listener;
 
@@ -14,6 +14,7 @@ class InitCrypto implements Runnable {
 
     @Override
     public void run() {
+
         for (;;) {
             int leftLimit = 32; // character ' '
             int rightLimit = 127; //
