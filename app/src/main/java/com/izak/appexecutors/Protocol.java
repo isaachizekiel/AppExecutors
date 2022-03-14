@@ -36,7 +36,7 @@ public class Protocol {
         if (pk.length() > 1 && ciphertext.length() == 1 && signature.length() == 1) {
             // show send fund
             Log.e(TAG, "decode: show send fund");
-            listener.onProtocolInput(pk);
+            input(pk);
         } else if (pk.length() == 1 && ciphertext.length() != 1 && signature.length() != 1) {
             // verify
             // decrypt
@@ -49,7 +49,6 @@ public class Protocol {
     }
 
     void input(String data) {
-        Log.e(TAG, "input: " );
         listener.onProtocolInput(data);
     }
 
@@ -58,7 +57,6 @@ public class Protocol {
         // sign cipher text
         // push to db
         listener.onProtocolOutput(data);
-        Log.e(TAG, "output: " );
     }
 
     interface ProtocolListener {
