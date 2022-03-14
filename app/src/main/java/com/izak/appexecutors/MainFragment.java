@@ -29,7 +29,7 @@ public class MainFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Protocol((MainActivity)getActivity()).output(Utils.encodePK(Crypto2.publicKey.getEncoded()));
+                new Protocol((MainActivity)getActivity()).display(Utils.encodePK(Crypto2.publicKey.getEncoded()));
             }
         });
         return view;

@@ -2,11 +2,11 @@ package com.izak.appexecutors;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +16,11 @@ import androidx.fragment.app.DialogFragment;
 public class SendDialogFragment extends DialogFragment {
     MainActivity activity;
     View view;
+    String qrText;
+    public SendDialogFragment(String qr) {
+        qrText = qr;
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +41,8 @@ public class SendDialogFragment extends DialogFragment {
         b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                
+                EditText value = view.findViewById(R.id.input);
+                new Protocol((MainActivity)getActivity()).in(value.getText().toString());
             }
         });
         b.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

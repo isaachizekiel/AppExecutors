@@ -6,6 +6,8 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+enum MessageTypes {OUT, IN}
+
 public class Protocol {
     private static final String TAG = "Protocol";
     ProtocolListener listener;
@@ -20,7 +22,7 @@ public class Protocol {
     // ?(cancel)-> }
     //
     // ?(protocol only cip and sig) -> { verify, decrypt, push to db}
-    void decode(String protocol) {
+    MessageTypes decode(String protocol) {
         String protocolJson = new String(Base64.decode(protocol, Base64.DEFAULT));
         Log.e(TAG, "decode: " + protocolJson );
 
@@ -35,29 +37,39 @@ public class Protocol {
 
         if (pk.length() > 1 && ciphertext.length() == 1 && signature.length() == 1) {
             // show send fund
-            Log.e(TAG, "decode: show send fund");
-            input(pk);
+            // input(pk);
+            return MessageTypes.OUT;
         } else if (pk.length() == 1 && ciphertext.length() != 1 && signature.length() != 1) {
             // verify
             // decrypt
             // push to db
             Log.e(TAG, "decode: not supposed to be here for now" );
+            return MessageTypes.IN;
         } else {
             Log.e(TAG, "decode: protocol error");
         }
 
+        return MessageTypes.OUT;
     }
 
-    private void input(String data) {
-        listener.onProtocolInput(data);
-    }
-
-    public void output(String data) {
-        // encrypt value
-        // sign cipher text
-        // push to db
+    public void display(String data) {
         listener.onProtocolOutput(data);
     }
+
+
+    public void in(String b64json) {
+        // verify
+        // decrypt
+        // push
+    }
+
+    public void out(String b64json) {
+        // encrypt
+        // sign
+        // push
+        // show
+    }
+
 
     interface ProtocolListener {
         void onProtocolOutput(String protocol);

@@ -129,7 +129,7 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onProtocolInput(String protocol) {
         Log.e(TAG, "onProtocolInput: " );
-        new SendDialogFragment().show(getSupportFragmentManager(), "input");
+        new SendDialogFragment(protocol).show(getSupportFragmentManager(), "input");
     }
 
     // sub classes and interfaces

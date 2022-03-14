@@ -58,7 +58,17 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
 
     @Override
     public void onDecoded(@NonNull Result result) {
-        new Protocol((MainActivity)getActivity()).decode(result.getText());
+        Protocol protocol = new Protocol((MainActivity)getActivity());
+        MessageTypes messageTypes = protocol.decode(result.getText());
+        switch (messageTypes) {
+            case IN:
+                protocol.in(result.getText());
+                break;
+            case OUT:
+            default:
+                protocol.out(result.getText());
+                break;
+        }
     }
 
 
