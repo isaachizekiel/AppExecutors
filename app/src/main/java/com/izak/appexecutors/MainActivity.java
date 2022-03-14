@@ -15,7 +15,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-public class MainActivity extends FragmentActivity implements Crypto2.Init.InitListener, MainFragment.MainFragmentListener {
+public class MainActivity extends FragmentActivity
+        implements Crypto2.Init.InitListener,
+        MainFragment.MainFragmentListener, ScanFragment.ScanFragmentListener {
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_REQUEST_CODE = 100;
     private static final int NUM_SLIDER_PAGES = 2;

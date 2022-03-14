@@ -22,6 +22,7 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
     private static final String TAG = "ScanFragment";
     private MainActivity activity;
     private CodeScanner codeScanner;
+    ScanFragmentListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        listener = (ScanFragmentListener) context;
     }
 
     @Override
@@ -70,7 +72,7 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
 
     @Override
     public void onProtocol() {
-        Log.e(TAG, "onProtocol: ");
+        listener.onShowProtocol("b64json");
     }
 
     @Override
@@ -79,4 +81,8 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
     }
 
 
+
+    interface ScanFragmentListener {
+        void onShowProtocol(String protocol);
+    }
 }
