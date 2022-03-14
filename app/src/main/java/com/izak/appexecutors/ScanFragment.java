@@ -71,8 +71,8 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
     }
 
     @Override
-    public void onProtocol() {
-        listener.onShowProtocol("b64json");
+    public void onProtocol(String protocol) {
+        listener.onShowProtocol(protocol);
     }
 
     @Override

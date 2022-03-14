@@ -7,10 +7,17 @@ public class Protocol {
     Protocol(ProtocolListener listener) {this.listener = listener; }
 
     void decode(String protocol) {
-        listener.onProtocol();
+
+        // decode json
+
+
+        listener.onProtocol(protocol);
     }
 
+
+
+
     interface ProtocolListener {
-        void onProtocol();
+        void onProtocol(String protocol);
     }
 }
