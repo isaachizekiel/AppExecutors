@@ -17,7 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 public class MainActivity extends FragmentActivity
         implements Crypto2.Init.InitListener,
-        MainFragment.MainFragmentListener, ScanFragment.ScanFragmentListener {
+        Protocol.ProtocolListener {
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_REQUEST_CODE = 100;
     private static final int NUM_SLIDER_PAGES = 2;
@@ -119,11 +119,18 @@ public class MainActivity extends FragmentActivity
         }
     }
 
+
     @Override
-    public void onShowProtocol(String b64Json) {
-        new ShowQrDialogFragment(b64Json).show(getSupportFragmentManager(), "b64Json");
+    public void onProtocolOutput(String protocol) {
+        Log.e(TAG, "onProtocolOutput: " );
+        new ShowQrDialogFragment(protocol).show(getSupportFragmentManager(), "b64Json");
     }
 
+    @Override
+    public void onProtocolInput(String protocol) {
+        Log.e(TAG, "onProtocolInput: " );
+        new SendDialogFragment().show(getSupportFragmentManager(), "input");
+    }
 
     // sub classes and interfaces
     private static class ScreenSlidePagerAdapter extends FragmentStateAdapter {

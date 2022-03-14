@@ -1,8 +1,6 @@
 package com.izak.appexecutors;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +16,10 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.budiyev.android.codescanner.ScanMode;
 import com.google.zxing.Result;
 
-public class ScanFragment extends Fragment implements DecodeCallback, View.OnClickListener, Protocol.ProtocolListener {
+public class ScanFragment extends Fragment implements DecodeCallback, View.OnClickListener {
     private static final String TAG = "ScanFragment";
     private MainActivity activity;
     private CodeScanner codeScanner;
-    ScanFragmentListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,27 +57,14 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        listener = (ScanFragmentListener) context;
-    }
-
-    @Override
     public void onDecoded(@NonNull Result result) {
-        new Protocol(this).decode(result.getText());
+        new Protocol((MainActivity)getActivity()).decode(result.getText());
     }
 
-    @Override
-    public void onProtocol(String protocol) {
-        listener.onShowProtocol(protocol);
-    }
 
     @Override
     public void onClick(View view) {
         codeScanner.startPreview();
     }
 
-    interface ScanFragmentListener {
-        void onShowProtocol(String protocol);
-    }
 }

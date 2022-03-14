@@ -1,27 +1,68 @@
 package com.izak.appexecutors;
 
+import android.util.Base64;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Protocol {
     private static final String TAG = "Protocol";
     ProtocolListener listener;
 
+    private String pk, ciphertext, signature;
+
     Protocol(ProtocolListener listener) {this.listener = listener; }
 
+    // decode json
+    // ?(protocol only pk) -> { show send fund dialog..
+    // ?(send)-> { encrypt_value, sign, ~push_to_db, ~show_qr }
+    // ?(cancel)-> }
+    //
+    // ?(protocol only cip and sig) -> { verify, decrypt, push to db}
     void decode(String protocol) {
-        // decode json
-        // ?(protocol only pk) -> { show send fund dialog..
-        // ?(send)-> { encrypt_value, sign, ~push_to_db, ~show_qr }
-        // ?(cancel)-> }
-        //
-        // ?(protocol only cip and sig) -> { verify, decrypt, push to db}
+        String protocolJson = new String(Base64.decode(protocol, Base64.DEFAULT));
+        Log.e(TAG, "decode: " + protocolJson );
 
+        try {
+            JSONObject jsonObject = new JSONObject(protocolJson);
+            pk = jsonObject.getString("p");
+            ciphertext = jsonObject.getString("c");
+            signature = jsonObject.getString("s");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        listener.onProtocol(protocol);
+        if (pk.length() > 1 && ciphertext.length() == 1 && signature.length() == 1) {
+            // show send fund
+            Log.e(TAG, "decode: show send fund");
+            listener.onProtocolInput(pk);
+        } else if (pk.length() == 1 && ciphertext.length() != 1 && signature.length() != 1) {
+            // verify
+            // decrypt
+            // push to db
+            Log.e(TAG, "decode: not supposed to be here for now" );
+        } else {
+            Log.e(TAG, "decode: protocol error");
+        }
+
     }
 
+    void input(String data) {
+        Log.e(TAG, "input: " );
+        listener.onProtocolInput(data);
+    }
 
-
+    void output(String data) {
+        // encrypt value
+        // sign cipher text
+        // push to db
+        listener.onProtocolOutput(data);
+        Log.e(TAG, "output: " );
+    }
 
     interface ProtocolListener {
-        void onProtocol(String protocol);
+        void onProtocolOutput(String protocol);
+        void onProtocolInput(String protocol);
     }
 }

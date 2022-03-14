@@ -1,6 +1,5 @@
 package com.izak.appexecutors;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
     MainActivity activity;
-    MainFragmentListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,23 +29,9 @@ public class MainFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProtocol(Utils.encodePK(Crypto2.publicKey.getEncoded()));
+                new Protocol((MainActivity)getActivity()).output(Utils.encodePK(Crypto2.publicKey.getEncoded()));
             }
         });
         return view;
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        listener = (MainFragmentListener) context;
-    }
-
-    void showProtocol(String b64Json) {
-        listener.onShowProtocol(b64Json);
-    }
-
-    interface MainFragmentListener {
-        void onShowProtocol(String b64Json);
     }
 }
