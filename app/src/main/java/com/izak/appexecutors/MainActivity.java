@@ -17,24 +17,16 @@ public class MainActivity extends AppCompatActivity implements Crypto2.Init.Init
     }
 
     @Override
-    public void onInitStatusUpdate(String status) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                TextView textView = findViewById(R.id.progress_status);
-                textView.setText(status);
-            }
+    public void onInitStatus(String status) {
+        runOnUiThread(() -> {
+            TextView textView = findViewById(R.id.progress_status);
+            textView.setText(status);
         });
     }
 
     @Override
-    public void onInitFinished() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mySetContentView(1);
-            }
-        });
+    public void onInitDone() {
+        runOnUiThread(() -> mySetContentView(1));
     }
 
     void mySetContentView(int  res) {

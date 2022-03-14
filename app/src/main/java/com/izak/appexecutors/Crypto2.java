@@ -47,7 +47,7 @@ public class Crypto2 {
             }
             //if (ks.containsAlias(KEY_ALIAS)) return;
             statusMsg = "Preparing wallet";
-            listener.onInitStatusUpdate(statusMsg);
+            listener.onInitStatus(statusMsg);
             Calendar start = new GregorianCalendar();
             Calendar end = new GregorianCalendar();
             end.add(Calendar.YEAR, 1);
@@ -78,13 +78,13 @@ public class Crypto2 {
             }
             publicKey = kpg.generateKeyPair().getPublic();
             statusMsg = "Done";
-            listener.onInitStatusUpdate(statusMsg);
-            listener.onInitFinished();
+            listener.onInitStatus(statusMsg);
+            listener.onInitDone();
         }
 
         interface InitListener {
-            void onInitStatusUpdate(String status);
-            void onInitFinished();
+            void onInitStatus(String status);
+            void onInitDone();
         }
     }
 }
