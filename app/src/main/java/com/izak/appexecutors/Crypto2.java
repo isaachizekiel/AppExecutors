@@ -20,15 +20,11 @@ import java.util.GregorianCalendar;
 import javax.security.auth.x500.X500Principal;
 
 public class Crypto2 {
-    static KeyStore ks;
-    public static final String KEY_ALIAS = "BT251Wallet";
-    public static KeyPairGenerator kpg;
+    private static KeyStore ks;
+    private static final String KEY_ALIAS = "BT251Wallet";
+    private static KeyPairGenerator kpg;
     public static PublicKey publicKey;
     public static String statusMsg;
-
-    public static PublicKey getPublicKey() {
-        return publicKey;
-    }
 
     static class Init implements Runnable {
         InitListener listener;
