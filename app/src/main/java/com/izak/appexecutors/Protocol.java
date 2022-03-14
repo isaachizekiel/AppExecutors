@@ -6,8 +6,6 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-enum MessageTypes {OUT, IN}
-
 public class Protocol {
     private static final String TAG = "Protocol";
     ProtocolListener listener;
@@ -38,13 +36,12 @@ public class Protocol {
         if (pk.length() > 1 && ciphertext.length() == 1 && signature.length() == 1) {
             // show send fund
             // input(pk);
-
+            Log.e(TAG, "decode: ");
         } else if (pk.length() == 1 && ciphertext.length() != 1 && signature.length() != 1) {
             // verify
             // decrypt
             // push to db
             Log.e(TAG, "decode: not supposed to be here for now" );
-
         } else {
             Log.e(TAG, "decode: protocol error");
         }
