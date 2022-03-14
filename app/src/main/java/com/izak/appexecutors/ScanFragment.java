@@ -80,8 +80,6 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
         codeScanner.startPreview();
     }
 
-
-
     interface ScanFragmentListener {
         void onShowProtocol(String protocol);
     }
