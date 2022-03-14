@@ -17,8 +17,6 @@ public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
     MainActivity activity;
     Listener listener;
-    private final String b64Json = Utils.encodePK(Crypto2.publicKey.getEncoded());
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
