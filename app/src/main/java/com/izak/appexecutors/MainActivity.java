@@ -12,19 +12,12 @@ public class MainActivity extends AppCompatActivity implements Crypto2.Init.Init
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
+        setContentView(R.layout.progress);
 
         AppExecutors.getInstance().cryptoIO().execute(new Crypto2.Init(this));
 
-        // main thread
-        AppExecutors.getInstance().mainThread().execute(new Runnable() {
-            @Override
-            public void run() {
 
-            }
-        });
+
     }
 
 
@@ -33,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements Crypto2.Init.Init
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                TextView textView = findViewById(R.id.status_message);
+                TextView textView = findViewById(R.id.progress_status);
                 textView.setText(status);
             }
         });
@@ -41,6 +34,12 @@ public class MainActivity extends AppCompatActivity implements Crypto2.Init.Init
 
     @Override
     public void onInitFinished() {
-        Log.e(TAG, "onInitFinished: ");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.activity_main);
+            }
+        });
+
     }
 }

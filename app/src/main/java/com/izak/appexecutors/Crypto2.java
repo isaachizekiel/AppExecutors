@@ -1,6 +1,5 @@
 package com.izak.appexecutors;
 
-import android.os.SystemClock;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 
@@ -17,7 +16,6 @@ import java.security.cert.CertificateException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Random;
 
 import javax.security.auth.x500.X500Principal;
 
@@ -78,7 +76,6 @@ public class Crypto2 {
             } catch (InvalidAlgorithmParameterException e) {
                 e.printStackTrace();
             }
-            statusMsg = "Preparing wallet3";
             publicKey = kpg.generateKeyPair().getPublic();
             statusMsg = "Done";
             listener.onInitStatusUpdate(statusMsg);
