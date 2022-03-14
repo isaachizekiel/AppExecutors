@@ -2,7 +2,6 @@ package com.izak.appexecutors;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
     MainActivity activity;
-    Listener listener;
+    MainFragmentListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,14 +40,14 @@ public class MainFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        listener = (Listener) context;
+        listener = (MainFragmentListener) context;
     }
 
     void showB64Json(String b64Json) {
         listener.onShowB64Json(b64Json);
     }
 
-    interface Listener {
+    interface MainFragmentListener {
         void onShowB64Json(String b64Json);
     }
 }
