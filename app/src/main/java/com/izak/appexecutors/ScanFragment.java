@@ -65,7 +65,7 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
 
     @Override
     public void onDecoded(@NonNull Result result) {
-        new Protocol(this);
+        new Protocol(this).decode(result.getText());
     }
 
     @Override

@@ -8,7 +8,9 @@ public class Protocol {
 
     Protocol(ProtocolListener listener) {this.listener = listener; }
 
-
+    void decode(String protocol) {
+        listener.onProtocol();
+    }
 
     interface ProtocolListener {
         void onProtocol();
