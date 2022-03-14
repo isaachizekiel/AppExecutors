@@ -37,6 +37,7 @@ public class Protocol {
             // show send fund
             // input(pk);
             Log.e(TAG, "decode: ");
+            listener.onProtocolInput(pk);
         } else if (pk.length() == 1 && ciphertext.length() != 1 && signature.length() != 1) {
             // verify
             // decrypt
