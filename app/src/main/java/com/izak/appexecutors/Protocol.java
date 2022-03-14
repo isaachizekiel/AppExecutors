@@ -22,7 +22,7 @@ public class Protocol {
     // ?(cancel)-> }
     //
     // ?(protocol only cip and sig) -> { verify, decrypt, push to db}
-    MessageTypes decode(String protocol) {
+    void decode(String protocol) {
         String protocolJson = new String(Base64.decode(protocol, Base64.DEFAULT));
         Log.e(TAG, "decode: " + protocolJson );
 
@@ -38,18 +38,17 @@ public class Protocol {
         if (pk.length() > 1 && ciphertext.length() == 1 && signature.length() == 1) {
             // show send fund
             // input(pk);
-            return MessageTypes.OUT;
+
         } else if (pk.length() == 1 && ciphertext.length() != 1 && signature.length() != 1) {
             // verify
             // decrypt
             // push to db
             Log.e(TAG, "decode: not supposed to be here for now" );
-            return MessageTypes.IN;
+
         } else {
             Log.e(TAG, "decode: protocol error");
         }
 
-        return MessageTypes.OUT;
     }
 
     public void display(String data) {
