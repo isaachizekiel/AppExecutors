@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity implements Crypto2.Init.Init
         AppExecutors.getInstance().cryptoIO().execute(new Crypto2.Init(this));
     }
 
-
     @Override
     public void onInitStatusUpdate(String status) {
         runOnUiThread(new Runnable() {
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements Crypto2.Init.Init
         switch (res) {
             case 1:
                 setContentView(R.layout.activity_main);
+                break;
             case 0:
             default:
                 setContentView(R.layout.progress);
