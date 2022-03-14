@@ -1,7 +1,5 @@
 package com.izak.appexecutors;
 
-import android.util.Log;
-
 public class Protocol {
     private static final String TAG = "Protocol";
     ProtocolListener listener;
