@@ -48,11 +48,11 @@ public class Protocol {
 
     }
 
-    void input(String data) {
+    private void input(String data) {
         listener.onProtocolInput(data);
     }
 
-    void output(String data) {
+    public void output(String data) {
         // encrypt value
         // sign cipher text
         // push to db
