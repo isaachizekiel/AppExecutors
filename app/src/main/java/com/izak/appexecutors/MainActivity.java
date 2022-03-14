@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-public class MainActivity extends FragmentActivity implements Crypto2.Init.InitListener {
+public class MainActivity extends FragmentActivity implements Crypto2.Init.InitListener, MainFragment.Listener {
     private static final String TAG = "MainActivity";
     private static final int PERMISSION_REQUEST_CODE = 100;
     private static final int NUM_SLIDER_PAGES = 2;
@@ -101,6 +101,7 @@ public class MainActivity extends FragmentActivity implements Crypto2.Init.InitL
         }
     }
 
+    // used from scan fragment
     public void checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             // You can use the API that requires the permission.
@@ -115,6 +116,11 @@ public class MainActivity extends FragmentActivity implements Crypto2.Init.InitL
             // You can directly ask for the permission.
             requestPermissionLauncher.launch(Manifest.permission.CAMERA);
         }
+    }
+
+    @Override
+    public void onShowB64Json(String b64Json) {
+        new ShowQrDialogFragment(b64Json).show(getSupportFragmentManager(), "b64Json");
     }
 
 

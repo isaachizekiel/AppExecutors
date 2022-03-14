@@ -26,6 +26,10 @@ public class Crypto2 {
     public static PublicKey publicKey;
     public static String statusMsg;
 
+    public static PublicKey getPublicKey() {
+        return publicKey;
+    }
+
     static class Init implements Runnable {
         InitListener listener;
         Init(InitListener listener) {
