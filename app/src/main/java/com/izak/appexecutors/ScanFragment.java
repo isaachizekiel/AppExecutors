@@ -1,5 +1,6 @@
 package com.izak.appexecutors;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.google.zxing.Result;
 public class ScanFragment extends Fragment implements DecodeCallback, View.OnClickListener {
     private MainActivity activity;
     private CodeScanner codeScanner;
+    ScanFragmentListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,12 +58,22 @@ public class ScanFragment extends Fragment implements DecodeCallback, View.OnCli
     }
 
     @Override
-    public void onDecoded(@NonNull Result result) {
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        listener = (ScanFragmentListener) context;
+    }
 
+    @Override
+    public void onDecoded(@NonNull Result result) {
+        listener.onProtocol(result.getText());
     }
 
     @Override
     public void onClick(View view) {
         codeScanner.startPreview();
+    }
+
+    interface ScanFragmentListener {
+        void onProtocol(String b64Json);
     }
 }

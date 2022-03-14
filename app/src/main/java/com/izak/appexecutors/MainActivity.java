@@ -118,7 +118,7 @@ public class MainActivity extends FragmentActivity implements Crypto2.Init.InitL
     }
 
     @Override
-    public void onShowB64Json(String b64Json) {
+    public void onShowProtocol(String b64Json) {
         new ShowQrDialogFragment(b64Json).show(getSupportFragmentManager(), "b64Json");
     }
 

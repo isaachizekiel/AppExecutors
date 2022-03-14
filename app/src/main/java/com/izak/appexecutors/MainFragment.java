@@ -31,7 +31,7 @@ public class MainFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showB64Json(Utils.encodePK(Crypto2.publicKey.getEncoded()));
+                showProtocol(Utils.encodePK(Crypto2.publicKey.getEncoded()));
             }
         });
         return view;
@@ -43,11 +43,11 @@ public class MainFragment extends Fragment {
         listener = (MainFragmentListener) context;
     }
 
-    void showB64Json(String b64Json) {
-        listener.onShowB64Json(b64Json);
+    void showProtocol(String b64Json) {
+        listener.onShowProtocol(b64Json);
     }
 
     interface MainFragmentListener {
-        void onShowB64Json(String b64Json);
+        void onShowProtocol(String b64Json);
     }
 }
