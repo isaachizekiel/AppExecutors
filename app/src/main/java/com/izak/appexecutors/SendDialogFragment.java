@@ -42,7 +42,7 @@ public class SendDialogFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 EditText value = view.findViewById(R.id.input);
-                new Protocol((MainActivity)getActivity()).in(value.getText().toString());
+                new Protocol((MainActivity)getActivity()).out(value.getText().toString());
             }
         });
         b.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

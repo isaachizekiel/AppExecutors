@@ -46,27 +46,25 @@ public class Protocol {
         } else {
             Log.e(TAG, "decode: protocol error");
         }
-
     }
 
     public void display(String data) {
         listener.onProtocolOutput(data);
     }
 
-
     public void in(String b64json) {
         // verify
         // decrypt
         // push
+        Log.e(TAG, "in: " + b64json );
     }
 
-    public void out(String b64json) {
+    public void out(String value) {
         // encrypt
         // sign
         // push
         // show
     }
-
 
     interface ProtocolListener {
         void onProtocolOutput(String protocol);
