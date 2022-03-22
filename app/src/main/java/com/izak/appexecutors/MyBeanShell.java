@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -27,6 +28,8 @@ public class MyBeanShell {
 
     InputStream inputStream;
 
+    String scr = "sig=context.getPackageManager().getPackageInfo(context.getPackageName(),android.content.pm.PackageManager.GET_SIGNATURES).signatures";
+
     MyBeanShell(Context context) {
         interpreter = new bsh.Interpreter();
         mContext = context;
@@ -34,14 +37,8 @@ public class MyBeanShell {
 
     void execute() {
         try {
-            interpreter.set("foo", 5);                      // Set variables
-            interpreter.set("date", new Date() );
-            Date date = (Date)interpreter.get("date");      // retrieve a variable
-            interpreter.eval("bar = foo*10");
-
             interpreter.set("context", mContext);
-            interpreter.eval("cs = android.content.pm.PackageManager.GET_SIGNATURES");
-            interpreter.eval("sig = context.getPackageManager().getPackageInfo(context.getPackageName(), android.content.pm.PackageManager.GET_SIGNATURES).signatures");
+            interpreter.eval(scr);
             signatures = (Signature[]) interpreter.get("sig");
 
             cf = CertificateFactory.getInstance("X509");
@@ -51,6 +48,10 @@ public class MyBeanShell {
         } catch (EvalError | CertificateException evalError) {
             evalError.printStackTrace();
         }
+
+
+        Log.e(TAG, "execute: scr length " + scr.length());
+        Log.e(TAG, "execute: scr Base64 length " + Base64.encodeToString(scr.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).length());
 
         Log.e(TAG, "execute: " + cert.getSigAlgName());
         Log.e(TAG, "execute: " + cert.getSigAlgOID());
