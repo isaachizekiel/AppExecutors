@@ -37,4 +37,7 @@ dependencies {
 
     // For the Qr Reader
     implementation 'com.github.yuriy-budiyev:code-scanner:2.1.2'
+
+    // beanshell
+    implementation 'org.apache-extras.beanshell:bsh:2.0b6'
 }
